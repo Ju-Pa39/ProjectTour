@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import tripStore from "./Store/TripStore";
 
 function List(props) {
   const { data, budget } = props
+
+
+  const filteredDupLocation = data.filter((item, index) => {
+    return data.findIndex(t => t.location.name === item.location.name) === index;
+  });
+
+  const getAllLocations = tripStore((state) => state.getAllLocations);
+
+
+  const hdlOnClick = (id) => {
+    try {
+      getAllLocations(id)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
 
   return (
@@ -12,8 +29,8 @@ function List(props) {
         <p className="text-lg mb-8 text-white">เลือกโปรแกรมสถานที่ที่สามารถไปได้</p>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {data.map((destination, index) => (
-            <button
+          {filteredDupLocation.map((destination, index) => (
+            <button onClick={() => hdlOnClick(destination.location.id)}
               key={index}
               className="w-48 h-64 bg-gray-200 flex items-center justify-center text-lg font-semibold rounded-md shadow-md">
               {destination.location.name}

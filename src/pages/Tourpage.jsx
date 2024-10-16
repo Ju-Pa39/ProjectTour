@@ -1,7 +1,26 @@
 import React from "react";
+import tripStore from "./Store/TripStore";
+
+
 
 const TourPage = (props) => {
-  const { budget, data } = props
+const { budget } = props
+
+const trips = tripStore((state) => state.trips);
+const trip = tripStore((state) => state.trip);
+
+
+const getAllTrip = tripStore((state) => state.getAllTrip);
+const hdlOnClick =  (id) => {
+  try {
+    getAllTrip(id)
+    console.log(id)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+console.log("trips",trip)
   return (
     <div className="flex flex-col items-center min-h-screen p-4">
       {/* Main Content */}
@@ -31,16 +50,20 @@ const TourPage = (props) => {
           </div>
 
           {/* Tour List */}
-          <div className="space-y-4">
+          <div  className="space-y-4">
 
-            {data.map((destination, index) => (
-              <div className="flex justify-between items-center bg-gray-100 p-4 rounded-lg">
+            {trips?.trip?.map((destination, index) => (
+              <div
+              key={destination.id} 
+              type="button"
+              onClick={() => hdlOnClick(destination.id)}
+              className="flex justify-between items-center bg-gray-100 p-4 rounded-lg">
                 <div className="flex items-center">
                   <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mr-4">
                     {/* Tour Image Placeholder */}
                     รูปทัวร์
                   </div>
-                  <div>{destination.tourCompany.name} {destination.startdate}</div>
+                  <div>{destination.tourCompany.name} {new Date(destination.startdate).toLocaleDateString()}</div>
                 </div>
                 <div className="text-lg font-semibold">{destination.price} บาท/คน</div>
               </div>

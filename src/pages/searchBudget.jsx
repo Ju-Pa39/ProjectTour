@@ -5,6 +5,7 @@ import TourPage from './Tourpage'
 import TourForm from './TourForm'
 import Login from './Auth/Login'
 import axios from 'axios'
+import RegisterForm from './Customer/Form'
 
 function SearchBudget() {
     const [search, setSearch] = useState({
@@ -57,7 +58,7 @@ function SearchBudget() {
             <List data={result} budget={budget} />
             <TourPage data={result} budget={budget} />
             <TourDetail />
-            <TourForm />
+            <RegisterForm/>
             <Login />
         </div>
     )

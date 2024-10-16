@@ -1,12 +1,6 @@
-import React, { useEffect,useState } from "react";
-import  tripStore  from "./Store/TripStore";
+import React from 'react'
 
-const TourDetail = () => {
-
-const trip = tripStore((state) => state.trip);
-console.log(trip)
-
-
+function TripDetali() {
   return (
     <div className="flex flex-col items-center min-h-screen p-4">
       {/* Main Content */}
@@ -53,7 +47,7 @@ console.log(trip)
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TourDetail;
+export default TripDetali
