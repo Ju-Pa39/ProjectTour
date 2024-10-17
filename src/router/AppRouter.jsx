@@ -7,7 +7,8 @@ import LayoutOwner from '../pages/layout.jsx/LayoutOwner'
 import Dashboard from '../pages/Owner/Dashboard'
 import LayoutCustomer from '../pages/layout.jsx/LayoutCustomer'
 import MyPrograms from '../pages/Customer/MyPrograms'
-import RegisterForm from '../pages/Customer/Form'
+import RegisterForm from '../pages/Form'
+import PaymentCheck from '../pages/Owner/PaymentCheck'
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,8 @@ const router = createBrowserRouter([
         element: <LayoutOwner />,
         children: [
             { index: true, element: <Dashboard /> },
+            { path: 'PaymentCheck', element: <PaymentCheck /> }
+
             
         ]
     },

@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import List from './List'
-import TourDetail from './TourDetail'
-import TourPage from './Tourpage'
-import TourForm from './TourForm'
+import TripList from './TripList'
+import TourDetail from './TripDetail'
+import TourPage from './Trippage'
 import Login from './Auth/Login'
 import axios from 'axios'
-import RegisterForm from './Customer/Form'
+import RegisterForm from './Form'
 
 function SearchBudget() {
     const [search, setSearch] = useState({
@@ -55,7 +54,7 @@ function SearchBudget() {
                     </div>
                 </div>
             </form>
-            <List data={result} budget={budget} />
+            <TripList data={result} budget={budget} />
             <TourPage data={result} budget={budget} />
             <TourDetail />
             <RegisterForm/>

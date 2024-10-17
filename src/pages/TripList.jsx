@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import tripStore from "./Store/TripStore";
 
-function List(props) {
+function TripList(props) {
   const { data, budget } = props
 
 
@@ -43,5 +43,5 @@ function List(props) {
   );
 }
 
-export default List;
+export default TripList;
 
