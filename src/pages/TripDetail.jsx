@@ -7,15 +7,18 @@ const trip = tripStore((state) => state.trip);
 console.log(trip)
 
 
+
   return (
     <div className="flex flex-col items-center min-h-screen p-4">
       {/* Main Content */}
       <div className="flex flex-col w-full max-w-4xl bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold mb-4">{trip?.price}</h1>
+        <h1 className="text-2xl font-bold mb-4">{trip?.location.name}</h1>
 
         <div className="flex">
           {/* Trip Description */}
           <div className="flex-grow bg-white p-4">
+          
+        
             <p>ทริป ปักษ์เหนือใต้ลอซู ออกผจญภัยกลางป่าหนึ่ง 3วัน2คืน (ไม่รวมวันเดินทาง)</p>
             <p className="mt-4 font-bold">#เตือนรับฝุ่นขาวๆหายใจ 5 วัน</p>
             <ul className="list-disc pl-6">

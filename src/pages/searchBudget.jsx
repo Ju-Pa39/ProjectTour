@@ -5,6 +5,9 @@ import TourPage from './Trippage'
 import Login from './Auth/Login'
 import axios from 'axios'
 import RegisterForm from './Form'
+import Trippage_CP from './Component/Trippage_CP'
+import TourCompanyInfo from './TourCompanyInfo'
+
 
 function SearchBudget() {
     const [search, setSearch] = useState({
@@ -12,6 +15,7 @@ function SearchBudget() {
     })
     const [result, setResult] = useState([])
     const [budget, setBudget] = useState(0)
+    const [show, setShow] = useState(false)
 
     const onChangeSearch = (e) => {
         setSearch({
@@ -21,10 +25,11 @@ function SearchBudget() {
         setBudget(+e.target.value)
         console.log(search)
     }
-
+ d
     const onSubmit = async (e) => {
         e.preventDefault()
         console.log(search)
+        setShow(true)
         try {
             const res = await axios.post('http://localhost:8000/admin/search', search)
             console.log(res)
@@ -33,6 +38,7 @@ function SearchBudget() {
             console.log(err)
         }
     }
+
 
     return (
         <div className='gap-2' >
@@ -55,10 +61,15 @@ function SearchBudget() {
                 </div>
             </form>
             <TripList data={result} budget={budget} />
-            <TourPage data={result} budget={budget} />
+            {
+                show
+                ? <TourPage data={result} budget={budget} />
+                :  <Trippage_CP />
+            }   
             <TourDetail />
-            <RegisterForm/>
+            <RegisterForm />
             <Login />
+            <TourCompanyInfo />
         </div>
     )
 }

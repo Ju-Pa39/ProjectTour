@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import tripStore from "../Store/TripStore";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-const TourForm = () => {
+
+const CreateTripForm = () => {
+  const quillRef = useRef(null)
   // State for form fields
   const [formData, setFormData] = useState({
     tour: "",
@@ -11,16 +16,37 @@ const TourForm = () => {
     details: "",
     images: [],
   });
+  // console.log(formData)
+
+  const tour = tripStore((state) => state.tour);
+  const getTour = tripStore((state) => state.getTour);
+  useEffect(() => {
+    getTour()
+  }, [])
+
+
+  const location = tripStore((state) => state.location);
+  const getLocation = tripStore((state) => state.getLocation);
+  useEffect(() => {
+    getLocation()
+  }, [])
+  // console.log(getLocation)
+
 
   // Handler to update form state
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (files) {
-      setFormData({ ...formData, [name]: [...files] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    console.log(e.target.name, e.target.value)
+    setFormData({ ...formData, [name]: value });
   };
+  console.log(formData)
+
+  const handleChangeQuill = (Content) => {
+    setFormData({ ...formData, details: Content });
+  };
+
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +61,7 @@ const TourForm = () => {
         <div className="text-center text-2xl font-bold mb-6">LOGO</div>
 
         {/* Form */}
-        <h2 className="text-center text-lg font-bold mb-4">กรอกข้อมูลทัวร์</h2>
+        <h2 className="text-center text-lg font-bold mb-4">กรอกข้อมูลทริป</h2>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
           {/* Tour Dropdown */}
@@ -49,22 +75,27 @@ const TourForm = () => {
               <option value="" disabled>
                 เลือกทัวร์
               </option>
-              <option value="tour1">ทัวร์ 1</option>
-              <option value="tour2">ทัวร์ 2</option>
-              <option value="tour3">ทัวร์ 3</option>
+              {tour?.tour?.map((destination, index) => (
+                <option key={destination.id} value={`${destination.id}`}>{destination.name}</option>
+              ))}
             </select>
           </div>
 
           {/* Location Input */}
           <div>
-            <input
-              type="text"
-              name="location"
+            <select
+              name="Location"
               value={formData.location}
               onChange={handleChange}
-              placeholder="สถานที่"
               className="w-full px-4 py-2 border rounded-md bg-gray-200 text-gray-800"
-            />
+            >
+              <option value="" disabled>
+                เลือกสถานที่
+              </option>
+              {location?.map((destination, index) => (
+                <option key={destination.id} value={`${destination.id}`}>{destination.name}</option>
+              ))}
+            </select>
           </div>
 
           {/* Date Range */}
@@ -100,14 +131,8 @@ const TourForm = () => {
 
           {/* Details Textarea */}
           <div className="col-span-2">
-            <textarea
-              name="details"
-              value={formData.details}
-              onChange={handleChange}
-              placeholder="ข้อมูลรายละเอียดทัวร์"
-              className="w-full px-4 py-2 border rounded-md bg-gray-200 text-gray-800"
-              rows="4"
-            ></textarea>
+            {/* <ReactQuill theme="snow" value={value} onChange={setValue} /> */}
+            <ReactQuill ref={quillRef} name="details" theme="snow" value={formData.details} onChange={handleChangeQuill} />
           </div>
 
           {/* Image Upload */}
@@ -141,8 +166,9 @@ const TourForm = () => {
           </div>
         </form>
       </div>
+      <div dangerouslySetInnerHTML={{ __html: formData.details }} />
     </div>
   );
 };
 
-export default TourForm;
+export default CreateTripForm;

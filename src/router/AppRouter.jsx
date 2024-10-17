@@ -9,6 +9,7 @@ import LayoutCustomer from '../pages/layout.jsx/LayoutCustomer'
 import MyPrograms from '../pages/Customer/MyPrograms'
 import RegisterForm from '../pages/Form'
 import PaymentCheck from '../pages/Owner/PaymentCheck'
+import CreateTripForm from '../pages/Owner/CreateTripForm'
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
         element: <LayoutOwner />,
         children: [
             { index: true, element: <Dashboard /> },
+            { path: 'CreateTripForm', element: <CreateTripForm /> },
             { path: 'PaymentCheck', element: <PaymentCheck /> }
 
             
