@@ -10,6 +10,7 @@ import MyPrograms from '../pages/Customer/MyPrograms'
 import RegisterForm from '../pages/Form'
 import PaymentCheck from '../pages/Owner/PaymentCheck'
 import CreateTripForm from '../pages/Owner/CreateTripForm'
+import TourCompanyInfo from '../pages/Owner/TourCompanyInfo'
 
 const router = createBrowserRouter([
     {
@@ -23,7 +24,8 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <Dashboard /> },
             { path: 'CreateTripForm', element: <CreateTripForm /> },
-            { path: 'PaymentCheck', element: <PaymentCheck /> }
+            { path: 'PaymentCheck', element: <PaymentCheck /> },
+            { path: 'TourCompanyInfo', element: <TourCompanyInfo /> }
 
             
         ]

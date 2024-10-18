@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import axios from 'axios'
+import {  } from "module";
+import { useNavigate } from "react-router-dom";
+import tripStore from "../Store/TripStore";
+import useUserStore from "../Store/userStore";
 
 const Login = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -9,6 +13,11 @@ const Login = () => {
     password: ""
   })
 
+  const postLogin = useUserStore(state => state.postLogin)
+  // const user = useUserStore(state => state.user)
+
+  const navigate = useNavigate()
+
   //Register
   const [form, setForm] = useState({
     email: "",
@@ -16,7 +25,7 @@ const Login = () => {
     confirmPassword: "",
     firstName: "",
     lastName: "",
-    role: "CUSTOMER",
+    role: "",
     phone: ""
   })
 
@@ -37,14 +46,27 @@ const Login = () => {
 
   const hdlSubmitLogin = async (e) => {
     e.preventDefault()
-    console.log(formLogin)
     try {
-      const res = await axios.post('http://localhost:8000/auth/login', formLogin)
-      console.log(res)
+      const res = await postLogin(formLogin)
+      console.log(res.data.payload.role)
+      if (res.data.payload.role === 'OWNER') {
+        navigate('/owner')
+      } else if (res.data.payload.role === 'CUSTOMER') {
+        navigate('/home')
+      } 
     } catch (err) {
       console.log(err)
+      const errMsg = err.response.data.message
+      alert(errMsg)
     }
+    // console.log(formLogin)
+    // try {
+    //   const res = await axios.post('http://localhost:8000/auth/login', formLogin)
+    //   console.log(res)
+    // } catch (err) {
+    //   console.log(err)
   }
+
 
   //Register
   const hdlOnChang = (e) => {
@@ -78,7 +100,7 @@ const Login = () => {
           {/* Username Input */}
           <div className="mb-4">
             <input
-            name="email"
+              name="email"
               onChange={hdlOnChangLogin}
               type="text"
               placeholder="Username"
@@ -89,7 +111,7 @@ const Login = () => {
           {/* Password Input */}
           <div className="mb-4">
             <input
-            name="password"
+              name="password"
               onChange={hdlOnChangLogin}
               type="password"
               placeholder="Password"
@@ -153,6 +175,17 @@ const Login = () => {
                 />
               </div>
               <div className="mb-4">
+                <select
+                  name="role"
+                  onChange={hdlOnChang}
+                  className="w-full px-4 py-2 border rounded-md bg-gray-200 text-gray-800"
+                >
+                  <option value="">Role</option>
+                  <option value="CUSTOMER">CUSTOMER</option>
+                  <option value="OWNER">OWNER</option>
+                </select>
+              </div>
+              <div className="mb-4">
                 <input
                   name="firstName"
                   onChange={hdlOnChang}
@@ -179,6 +212,7 @@ const Login = () => {
                   className="w-full px-4 py-2 border rounded-md bg-gray-200 text-gray-800"
                 />
               </div>
+
 
               {/* Create Account Button */}
               <div className="flex justify-between">

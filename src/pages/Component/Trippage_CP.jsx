@@ -8,7 +8,7 @@ const Trippage_CP = () => {
     useEffect(() => {
         getTripByDate()
     }, [])
-    console.log('Jutestttt',tripDate)
+    // console.log('Jutestttt',tripDate)
 
     return (
         <div className="flex flex-col items-center min-h-screen p-4">

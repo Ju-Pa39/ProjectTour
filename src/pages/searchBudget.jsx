@@ -6,7 +6,7 @@ import Login from './Auth/Login'
 import axios from 'axios'
 import RegisterForm from './Form'
 import Trippage_CP from './Component/Trippage_CP'
-import TourCompanyInfo from './TourCompanyInfo'
+import TourCompanyInfo from './Owner/TourCompanyInfo'
 
 
 function SearchBudget() {
@@ -25,7 +25,7 @@ function SearchBudget() {
         setBudget(+e.target.value)
         console.log(search)
     }
- d
+ 
     const onSubmit = async (e) => {
         e.preventDefault()
         console.log(search)
@@ -69,7 +69,6 @@ function SearchBudget() {
             <TourDetail />
             <RegisterForm />
             <Login />
-            <TourCompanyInfo />
         </div>
     )
 }

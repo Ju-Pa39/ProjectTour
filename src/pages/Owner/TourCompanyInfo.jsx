@@ -37,14 +37,14 @@ const TourCompanyInfo = () => {
                     <tr className="border-b">
                         <th className="p-2">ลำดับ</th>
                         <th className="p-2">ชื่อบริษัททัวร์</th>
-                        <th className="p-2">Action</th>
+                        <th className="p-2 text-right">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td className="p-2 justify-center items-center">1</td>
                         <td className="p-2">คลุกฝุ่นทัวร์</td>
-                        <td className="p-2">
+                        <td className="p- text-right space-x-2 ml-4">
                             <button className="bg-orange-500 text-white py-1 px-3 rounded">ดู/แก้ไข</button>
                             <button className="bg-red-500 text-white py-1 px-3 rounded">ลบ</button>
 

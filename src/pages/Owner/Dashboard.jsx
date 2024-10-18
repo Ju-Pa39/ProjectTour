@@ -4,11 +4,8 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="text-right mb-6">
         <h1 className="text-2xl font-bold">กรกฎาคม 2567</h1>
-        <div className="flex items-center space-x-4">
-          <div className="w-10 h-10 bg-black rounded-full"></div>
-        </div>
       </div>
 
       {/* Summary Section */}
@@ -75,9 +72,7 @@ const TourRow = ({ tour, location, price, totalGuests, paidGuests }) => (
     <td className="p-2 border-b">{price}</td>
     <td className="p-2 border-b">{totalGuests}</td>
     <td className="p-2 border-b">{paidGuests}</td>
-    <td className="p-2 border-b">
-      <button className="bg-gray-300 text-black px-2 py-1 rounded-md">ดู/แก้ไข</button>
-    </td>
+   
   </tr>
 );
 

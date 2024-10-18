@@ -4,7 +4,7 @@ import  tripStore  from "./Store/TripStore";
 const TourDetail = () => {
 
 const trip = tripStore((state) => state.trip);
-console.log(trip)
+// console.log(trip)
 
 
 

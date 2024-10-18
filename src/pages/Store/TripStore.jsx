@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import axios from 'axios'
 import CreateTripForm from "../Owner/CreateTripForm";
+import { persist,createJSONStorage } from "zustand/middleware";
 
 const tripStore = create((set) => ({
     trips: [], 
@@ -9,6 +10,8 @@ const tripStore = create((set) => ({
     tour: [],
     location: [],
     postTrip: null,
+    user: null,
+    token: null,
     getAllLocations: async (id) => {
         const res = await axios.get('http://localhost:8000/admin/getLocationById/' + id)
         set({ trips: res.data });
@@ -21,7 +24,7 @@ const tripStore = create((set) => ({
     },
     getTripByDate: async () => {
         const res = await axios.get('http://localhost:8000/admin/getTripByDate')
-        console.log(res.data)
+        // console.log(res.data)
         set({ tripDate: res.data });
     },
     getTour : async () => {
@@ -34,6 +37,7 @@ const tripStore = create((set) => ({
         set({ location: res.data});
     }
 }));
+
 
 
 export default tripStore;
