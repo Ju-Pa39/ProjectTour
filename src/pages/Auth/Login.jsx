@@ -59,12 +59,6 @@ const Login = () => {
       const errMsg = err.response.data.message
       alert(errMsg)
     }
-    // console.log(formLogin)
-    // try {
-    //   const res = await axios.post('http://localhost:8000/auth/login', formLogin)
-    //   console.log(res)
-    // } catch (err) {
-    //   console.log(err)
   }
 
 

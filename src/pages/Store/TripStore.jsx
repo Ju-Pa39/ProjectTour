@@ -35,7 +35,35 @@ const tripStore = create((set) => ({
         const res = await axios.get('http://localhost:8000/admin/getLocation')
         // console.log(res.data)
         set({ location: res.data});
-    }
+    },
+     uploadFiles : async (form) => {
+        // code 
+        // console.log('form api frontent', form)
+        return axios.post('http://localhost:8000/admin/images', {
+            image: form
+        }, {
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // }
+        })
+    },
+    
+     removeFiles : async (public_id) => {
+        // code 
+        // console.log('form api frontent', form)
+        return axios.post('http://localhost:8000/admin/removeimages', {
+            public_id
+        }, {
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // }
+        })
+    },
+        postTrip : async (form) =>{
+        const res = await axios.post('http://localhost:8000/admin/createTrip', form)
+        console.log(res.data)
+        set({ postTrip: res.data });
+    },
 }));
 
 

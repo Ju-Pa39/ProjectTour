@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import tripStore from "../Store/TripStore";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import UpLoadFile from "../Component/Uploadfile";
 
 
 const CreateTripForm = () => {
@@ -17,7 +18,7 @@ const CreateTripForm = () => {
     images: [],
   });
   // console.log(formData)
-
+  const postTrip = tripStore((state) => state.postTrip);
   const tour = tripStore((state) => state.tour);
   const getTour = tripStore((state) => state.getTour);
   useEffect(() => {
@@ -48,9 +49,14 @@ const CreateTripForm = () => {
 
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      const res = await postTrip(formData)
+      console.log(formData)
+    } catch (error) {
+      console.log(error)
+    }
     // Add form submit logic, e.g., send data to the server
   };
 
@@ -84,7 +90,7 @@ const CreateTripForm = () => {
           {/* Location Input */}
           <div>
             <select
-              name="Location"
+              name="location"
               value={formData.location}
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-md bg-gray-200 text-gray-800"
@@ -135,24 +141,12 @@ const CreateTripForm = () => {
             <ReactQuill ref={quillRef} name="details" theme="snow" value={formData.details} onChange={handleChangeQuill} />
           </div>
 
-          {/* Image Upload */}
+          {/* Image Upload************************************** */}
           <div className="col-span-2">
             <label className="block mb-2 text-sm text-gray-600">
               อัปโหลดรูป
             </label>
-            <input
-              type="file"
-              name="images"
-              onChange={handleChange}
-              multiple
-              className="w-full px-4 py-2 border rounded-md bg-gray-200 text-gray-800"
-            />
-            <div className="grid grid-cols-4 gap-2 mt-4">
-              {formData.images.length > 0 &&
-                Array.from(formData.images).map((file, index) => (
-                  <div key={index} className="w-full h-32 bg-green-500"></div>
-                ))}
-            </div>
+            <UpLoadFile formData={formData} setFormData={setFormData} />
           </div>
 
           {/* Submit Button */}
