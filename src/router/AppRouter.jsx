@@ -11,12 +11,19 @@ import RegisterForm from '../pages/Form'
 import PaymentCheck from '../pages/Owner/PaymentCheck'
 import CreateTripForm from '../pages/Owner/CreateTripForm'
 import TourCompanyInfo from '../pages/Owner/TourCompanyInfo'
+import Recommend from '../pages/Component/recommend'
 
 const router = createBrowserRouter([
     {
         path: '/Home',
         element: <Layout />,
-        children: [{ index: true, element: <SearchBudget /> }]
+        children: [
+            { index: true, element: <SearchBudget /> },
+            { path: 'RegisterForm', element: <RegisterForm /> },
+            { path: 'Recommend', element: <Recommend /> },
+
+        ]
+        
     },
     {
         path: '/Owner',
@@ -52,7 +59,7 @@ const router = createBrowserRouter([
 export const AppRouter = () => {
     return (
         <div className="bg-custom-pattern min-h-screen bg-fixed bg-cover bg-center bg-slate-500" 
-        style={{backgroundImage: `url('https://scontent.fbkk6-1.fna.fbcdn.net/v/t39.30808-6/458799067_1066312438197188_8738832615108666864_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=TplQRy4lJBEQ7kNvgFjNQtM&_nc_ht=scontent.fbkk6-1.fna&_nc_gid=AHjOTWXaGukUBEPddH1T71W&oh=00_AYCu-ghtRhp3DL75KNWDJyu_nzpS2SN1qfdnBIwaIGfajg&oe=670EA933')`,
+        style={{backgroundImage: `url('https://scontent.fbkk28-1.fna.fbcdn.net/v/t39.30808-6/458799067_1066312438197188_8738832615108666864_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=VopEAnQPLw0Q7kNvgGdv0dn&_nc_zt=23&_nc_ht=scontent.fbkk28-1.fna&_nc_gid=A_IQQ9Vt4iKNmEiEp0QHe8I&oh=00_AYAXD5SaMMQ2T2cMKfPcQWLpVuG8EC3MNdSHilhz-AYCxg&oe=6718FCF3')`,
         }} >
             {/* <Header listScroll={listScroll} TourPageScroll={TourPageScroll} TourDetailScroll={TourDetailScroll} /> */}
             

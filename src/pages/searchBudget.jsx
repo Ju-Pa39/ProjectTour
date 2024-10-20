@@ -7,6 +7,7 @@ import axios from 'axios'
 import RegisterForm from './Form'
 import Trippage_CP from './Component/Trippage_CP'
 import TourCompanyInfo from './Owner/TourCompanyInfo'
+import Recommend from './Component/recommend'
 
 
 function SearchBudget() {
@@ -60,14 +61,18 @@ function SearchBudget() {
                     </div>
                 </div>
             </form>
-            <TripList data={result} budget={budget} />
+            {
+                show
+                ?<TripList data={result} budget={budget} />
+                : <Recommend />
+            }
+            {/* <TripList data={result} budget={budget} /> */}
             {
                 show
                 ? <TourPage data={result} budget={budget} />
                 :  <Trippage_CP />
-            }   
+            } 
             <TourDetail />
-            <RegisterForm />
             <Login />
         </div>
     )

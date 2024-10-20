@@ -1,62 +1,77 @@
-import React, { useEffect,useState } from "react";
 import  tripStore  from "./Store/TripStore";
-
+import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 const TourDetail = () => {
+  const trip = tripStore((state) => state.trip);
+  const images = trip?.Image && trip.Image.length > 0
+  ? trip.Image.map((img) => img.url)
+  : [];
+  // [
+  //   'https://scontent.fbkk6-2.fna.fbcdn.net/v/t39.30808-6/460280234_1071937364301362_4246267936584596257_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=mYR_1eoDvDoQ7kNvgFwCnad&_nc_ht=scontent.fbkk6-2.fna&_nc_gid=AUr4K94OntwDEv9_ceCrmbC&oh=00_AYBBDvGUX-K91wo4ATOXgbHIJ2Rrt_gX2a-DaEPbOZ09lQ&oe=670E94C5',
+  //   'https://scontent.fbkk28-1.fna.fbcdn.net/v/t39.30808-6/391719363_122096324246086617_6162034278027518019_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=AssqNg9Mt2gQ7kNvgESuXL0&_nc_zt=23&_nc_ht=scontent.fbkk28-1.fna&_nc_gid=AOa30VXRcZLbEA52QU93-nP&oh=00_AYCcg37DXGBmUrT6wl5klDibjIwt8iowUHkHSYF4Lr7ieQ&oe=67187964',
+  //   'https://scontent.fbkk28-1.fna.fbcdn.net/v/t39.30808-6/392930969_122096324222086617_2485170338021911442_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=Eaqtg0t8EGkQ7kNvgH9nMW1&_nc_zt=23&_nc_ht=scontent.fbkk28-1.fna&_nc_gid=AYvBiMUW1tz4OkKXRjqC3H8&oh=00_AYBKuhGbZFn7bWT7ebfa2PtLB-KjjXtrivWUS08H4xrkMQ&oe=67188924',
+  // ]; // เพิ่ม URL ของรูปภาพที่ต้องการแสดงใน carousel
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-const trip = tripStore((state) => state.trip);
-// console.log(trip)
+  // ฟังก์ชันสำหรับเปลี่ยนรูปภาพ
+  const nextImage = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
 
-
+  const prevImage = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
 
   return (
-    <div className="flex flex-col items-center min-h-screen p-4">
-      {/* Main Content */}
-      <div className="flex flex-col w-full max-w-4xl bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold mb-4">{trip?.location.name}</h1>
+    <div className="flex flex-col items-center p-8">
+      <h1 className="text-3xl font-bold mb-6">ทริปคลุกฝุ่นทัวร์</h1>
 
-        <div className="flex">
-          {/* Trip Description */}
-          <div className="flex-grow bg-white p-4">
-          
-        
-            <p>ทริป ปักษ์เหนือใต้ลอซู ออกผจญภัยกลางป่าหนึ่ง 3วัน2คืน (ไม่รวมวันเดินทาง)</p>
-            <p className="mt-4 font-bold">#เตือนรับฝุ่นขาวๆหายใจ 5 วัน</p>
-            <ul className="list-disc pl-6">
-              <li>ฟูจิประเทศไทย (การเดินเท้า)</li>
-              <li>เดินโขด 2 วัน 1 คืน</li>
-              <li>พร้อมซองนอนใหม่ๆ</li>
-              <li>ไม้เท้าเดินป่า 1 อัน</li>
-            </ul>
-            <p className="mt-4 font-bold">#ท้าทายสุดๆ</p>
-            <p>- วันแห่งชัยชนะใช้ทักษะ 5 วัน (พร้อมรับวันไว้ได้เมื่อออกมา)</p>
-            <p className="mt-4">
-              GoGo...เส้นทางวิวสวย...ของผาผ้าใบพร้อม น้ำตกปิตุ๊โกท(น้ำตกรูปหัวใจ)
-              ป่าที่เต็มไปด้วยเถาวัลย์และธรรมชาติของขุนเขา ซื้อของฝากได้ที่ป้ายน้ำตกดอยหลวงตาก จ.สุโขทัย จ.ตาก
-            </p>
-            
-          </div>
-
-          {/* Image Section */}
-          <div className="flex-grow-0">
-            <img
-              className="w-full h-full object-cover rounded-lg"
-              src="https://scontent.fbkk6-2.fna.fbcdn.net/v/t39.30808-6/460280234_1071937364301362_4246267936584596257_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=mYR_1eoDvDoQ7kNvgFwCnad&_nc_ht=scontent.fbkk6-2.fna&_nc_gid=AUr4K94OntwDEv9_ceCrmbC&oh=00_AYBBDvGUX-K91wo4ATOXgbHIJ2Rrt_gX2a-DaEPbOZ09lQ&oe=670E94C5" // Replace with actual image URL
-              alt="ทริปคลุกฝุ่นทัวร์"
-            />
-          </div>
+      {/* Trip Content Section */}
+      <div className="flex items-center justify-between w-full max-w-6xl">
+        {/* Trip Details */}
+        <div className="border border-gray-400 p-4 w-1/2 bg-gray-100 rounded-lg">
+        <p dangerouslySetInnerHTML={{ __html: trip?.detail }}></p>
         </div>
 
-        {/* Carousel Dots and Call-to-Action */}
-        <div className="mt-6 flex justify-center items-center">
-          
-          {/* Call to Action Button */}
-          <button className="bg-blue-500 text-white py-2 px-6 rounded-lg text-lg">
-            สมัครเข้าร่วมทริป
+        {/* Trip Image Carousel */}
+        <div className="w-1/2 px-4 relative">
+          <img
+            src={images[currentIndex]}
+            alt="ทริป"
+            className="rounded-lg shadow-lg w-full"
+          />
+
+          {/* ปุ่มเลื่อนรูป */}
+          <button
+            onClick={prevImage}
+            className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600"
+          >
+            &#10094;
+          </button>
+          <button
+            onClick={nextImage}
+            className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600"
+          >
+            &#10095;
           </button>
         </div>
+      </div>
+
+      {/* Register Button */}
+      <div className="mt-6">
+        <Link className="bg-blue-500 text-white py-3 px-6 rounded-lg shadow hover:bg-blue-600 transition duration-300">
+          สมัครเข้าร่วมทริป
+        </Link>
       </div>
     </div>
   );
 };
 
 export default TourDetail;
+
+
+
+
+

@@ -10,6 +10,16 @@ const Trippage_CP = () => {
     }, [])
     // console.log('Jutestttt',tripDate)
 
+    const getAllTrip = tripStore((state) => state.getAllTrip);
+    const hdlOnClick = (id) => {
+        try {
+            getAllTrip(id)
+            console.log(id)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <div className="flex flex-col items-center min-h-screen p-4">
             {/* Main Content */}
@@ -20,7 +30,7 @@ const Trippage_CP = () => {
                         {/* Placeholder Image */}
                         <span className="text-center">Placeholder</span>
                     </div>
-                    <div className="mt-4 text-lg font-semibold">งบ 300 บาท</div>
+                    <div className="mt-4 text-lg font-semibold">ทริปไฟไหม้</div>
                 </div>
 
                 {/* Right Column (Tour List) */}

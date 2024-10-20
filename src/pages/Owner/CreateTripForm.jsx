@@ -3,6 +3,7 @@ import tripStore from "../Store/TripStore";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import UpLoadFile from "../Component/Uploadfile";
+import { Calendar } from 'lucide-react';
 
 
 const CreateTripForm = () => {
@@ -37,10 +38,10 @@ const CreateTripForm = () => {
   // Handler to update form state
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    console.log(e.target.name, e.target.value)
+    // console.log(e.target.name, e.target.value)
     setFormData({ ...formData, [name]: value });
   };
-  console.log(formData)
+  // console.log(formData)
 
   const handleChangeQuill = (Content) => {
     setFormData({ ...formData, details: Content });
@@ -61,10 +62,12 @@ const CreateTripForm = () => {
   };
 
   return (
+
+
     <div className="flex items-center justify-center h-screen">
       <div className="w-full max-w-3xl p-6 bg-white rounded-lg shadow-lg">
         {/* Logo */}
-        <div className="text-center text-2xl font-bold mb-6">LOGO</div>
+        <div className="text-center text-2xl font-bold mb-6">เที่ยวตามงบ</div>
 
         {/* Form */}
         <h2 className="text-center text-lg font-bold mb-4">กรอกข้อมูลทริป</h2>
@@ -103,23 +106,21 @@ const CreateTripForm = () => {
               ))}
             </select>
           </div>
-
-          {/* Date Range */}
           <div className="flex space-x-2">
             <input
               type="date"
               name="startDate"
               value={formData.startDate}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md bg-gray-200 text-gray-800"
+              className="flex-1 p-2 bg-gray-200 rounded" xs
             />
-            <span className="self-center">ถึง</span>
+            <span className="self-center text-sm">ถึง</span>
             <input
               type="date"
               name="endDate"
               value={formData.endDate}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md bg-gray-200 text-gray-800"
+              c className="flex-1 p-2 bg-gray-200 rounded"
             />
           </div>
 
@@ -137,7 +138,6 @@ const CreateTripForm = () => {
 
           {/* Details Textarea */}
           <div className="col-span-2">
-            {/* <ReactQuill theme="snow" value={value} onChange={setValue} /> */}
             <ReactQuill ref={quillRef} name="details" theme="snow" value={formData.details} onChange={handleChangeQuill} />
           </div>
 
@@ -146,6 +146,7 @@ const CreateTripForm = () => {
             <label className="block mb-2 text-sm text-gray-600">
               อัปโหลดรูป
             </label>
+
             <UpLoadFile formData={formData} setFormData={setFormData} />
           </div>
 
@@ -160,7 +161,7 @@ const CreateTripForm = () => {
           </div>
         </form>
       </div>
-      <div dangerouslySetInnerHTML={{ __html: formData.details }} />
+      {/* <div dangerouslySetInnerHTML={{ __html: formData.details }} /> */}
     </div>
   );
 };

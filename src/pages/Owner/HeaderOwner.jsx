@@ -6,7 +6,7 @@ function HeaderOwner() {
   const navigate = useNavigate()
     return (
         <nav>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  bg-gray-800">
+            <div className="px-4 sm:px-6 lg:px-8  bg-gray-800">
                 <div className="flex justify-between h-16">
                     {/* Logo */}
                     <div className="flex items-center">

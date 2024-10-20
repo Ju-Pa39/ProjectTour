@@ -58,7 +58,7 @@ const UpLoadFile = (props) => {
             }
         }
     }
-    console.log(formData)
+    // console.log(formData)
 
     // const handleDelete = (public_id) => {
     //     const images = formData.images
