@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import tripStore from "../Store/TripStore";
 import useUserStore from "../Store/userStore";
 
+
 const Login = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   //Login
@@ -34,6 +35,9 @@ const Login = () => {
     setIsModalOpen(!isModalOpen);
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   //Login
   const hdlOnChangLogin = (e) => {
@@ -48,11 +52,12 @@ const Login = () => {
     e.preventDefault()
     try {
       const res = await postLogin(formLogin)
+      console.log(formLogin)
       console.log(res.data.payload.role)
       if (res.data.payload.role === 'OWNER') {
         navigate('/owner')
       } else if (res.data.payload.role === 'CUSTOMER') {
-        navigate('/home')
+        navigate('/customer/RegisterTrip')
       } 
     } catch (err) {
       console.log(err)
@@ -60,6 +65,8 @@ const Login = () => {
       alert(errMsg)
     }
   }
+
+  
 
 
   //Register
@@ -115,7 +122,7 @@ const Login = () => {
 
           {/* Login Button */}
           <div className="mb-4">
-            <button className="w-full bg-gray-500 text-white py-2 rounded-md">
+            <button  className="w-full bg-gray-500 text-white py-2 rounded-md">
               Login
             </button>
           </div>
@@ -216,7 +223,7 @@ const Login = () => {
                 >
                   ยกเลิก
                 </button>
-                <button className="bg-blue-500 text-white py-2 px-6 rounded-lg">
+                <button onClick={closeModal} className="bg-blue-500 text-white py-2 px-6 rounded-lg">
                   สร้างบัญชี
                 </button>
               </div>

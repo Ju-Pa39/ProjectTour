@@ -1,4 +1,4 @@
-import  tripStore  from "./Store/TripStore";
+import tripStore from "./Store/TripStore";
 import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
@@ -7,13 +7,9 @@ const TripDetail = () => {
   const setcurrentTrip = tripStore((state) => state.setcurrentTrip);
   const trip = tripStore((state) => state.trip);
   const images = trip?.Image && trip.Image.length > 0
-  ? trip.Image.map((img) => img.url)
-  : [];
-  // [
-  //   'https://scontent.fbkk6-2.fna.fbcdn.net/v/t39.30808-6/460280234_1071937364301362_4246267936584596257_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=mYR_1eoDvDoQ7kNvgFwCnad&_nc_ht=scontent.fbkk6-2.fna&_nc_gid=AUr4K94OntwDEv9_ceCrmbC&oh=00_AYBBDvGUX-K91wo4ATOXgbHIJ2Rrt_gX2a-DaEPbOZ09lQ&oe=670E94C5',
-  //   'https://scontent.fbkk28-1.fna.fbcdn.net/v/t39.30808-6/391719363_122096324246086617_6162034278027518019_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=AssqNg9Mt2gQ7kNvgESuXL0&_nc_zt=23&_nc_ht=scontent.fbkk28-1.fna&_nc_gid=AOa30VXRcZLbEA52QU93-nP&oh=00_AYCcg37DXGBmUrT6wl5klDibjIwt8iowUHkHSYF4Lr7ieQ&oe=67187964',
-  //   'https://scontent.fbkk28-1.fna.fbcdn.net/v/t39.30808-6/392930969_122096324222086617_2485170338021911442_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=Eaqtg0t8EGkQ7kNvgH9nMW1&_nc_zt=23&_nc_ht=scontent.fbkk28-1.fna&_nc_gid=AYvBiMUW1tz4OkKXRjqC3H8&oh=00_AYBKuhGbZFn7bWT7ebfa2PtLB-KjjXtrivWUS08H4xrkMQ&oe=67188924',
-  // ]; // เพิ่ม URL ของรูปภาพที่ต้องการแสดงใน carousel
+    ? trip.Image.map((img) => img.url)
+    : [];
+
   // const [showTrip, setShowTrip] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -31,11 +27,11 @@ const TripDetail = () => {
     );
   };
 
-const hdlCilck = (id) => {
-  setcurrentTrip(id)
-  console.log('ttttttttt',id)
-  navigate("/Home/RegisterForm");
-}
+  const hdlCilck = (id) => {
+    setcurrentTrip(id)
+    console.log('ttttttttt', id)
+    navigate("/Home/RegisterForm");
+  }
 
 
   return (
@@ -47,7 +43,7 @@ const hdlCilck = (id) => {
       <div className="flex items-center justify-between w-full max-w-6xl">
         {/* Trip Details */}
         <div className="border border-gray-400 p-4 w-1/2 bg-gray-100 rounded-lg">
-        <p dangerouslySetInnerHTML={{ __html: trip?.detail }}></p>
+          <p dangerouslySetInnerHTML={{ __html: trip?.detail }}></p>
         </div>
 
         {/* Trip Image Carousel */}
@@ -76,8 +72,8 @@ const hdlCilck = (id) => {
 
       {/* Register Button */}
       <div className="mt-6">
-        <button  className="bg-blue-500 text-white py-3 px-6 rounded-lg shadow hover:bg-blue-600 transition duration-300"
-        onClick={()=>hdlCilck(trip?.id)}>
+        <button className="bg-blue-500 text-white py-3 px-6 rounded-lg shadow hover:bg-blue-600 transition duration-300"
+          onClick={() => hdlCilck(trip?.id)}>
           สมัครเข้าร่วมทริป
         </button>
       </div>
@@ -86,8 +82,3 @@ const hdlCilck = (id) => {
 };
 
 export default TripDetail;
-
-
-
-
-

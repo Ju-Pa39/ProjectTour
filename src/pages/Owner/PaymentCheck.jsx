@@ -4,6 +4,9 @@ import moment from "moment/min/moment-with-locales";
 
 function PaymentCheck() {
 
+  const [bookingId, setBookingId] = useState(null);
+
+  const updatebookingStatus = tripStore((state) => state.updatebookingStatus)
   const BookingC = tripStore((state) => state.BookingC)
   const getBooking = tripStore((state) => state.getBooking)
   console.log(BookingC)
@@ -11,19 +14,29 @@ function PaymentCheck() {
   useEffect(() => {
     getBooking()
   }, [])
-  
+
+  const hdlApprove = () => {
+    updatebookingStatus(bookingId, "SUCCESS")
+    closeModal()
+  }
+
+  const hdlCancel = () => {
+    updatebookingStatus(bookingId, "CANCEL")
+    closeModal()
+  }
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // เปิด Modal
   const openModal = () => setIsModalOpen(true);
-  
+
   // ปิด Modal
   const closeModal = () => setIsModalOpen(false);
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
-  
+
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
         <div className="text-lg font-bold">รอตรวจสอบชำระเงิน</div>
@@ -39,29 +52,34 @@ function PaymentCheck() {
               <th className="p-3 text-left">ชื่อ-สกุล</th>
               <th className="p-3 text-left">สถานที่</th>
               <th className="p-3 text-left">วันที่</th>
+              <th className="p-3 text-left">สถานะ</th>
               <th className="p-3 text-left">Action</th>
             </tr>
           </thead>
           <tbody>
 
-{BookingC?.map((item, index) =>
+            {BookingC?.map((item, index) =>
 
 
-            <tr key={index}>
-              <td className="p-3">{index+1}</td>
-              <td className="p-3">{item.name}</td>
-              <td className="p-3">{item.trip.location.name}</td>
-              <td className="p-3">{moment(item.trip.startdate).locale("th").format("LL")}</td>
-              <td className="p-3">
-                <button
-                  className="bg-orange-400 text-white px-4 py-2 rounded"
-                  onClick={openModal}
-                >
-                  ตรวจสอบการชำระ
-                </button>
-              </td>
-            </tr>
-)}
+              <tr key={index}>
+                <td className="p-3">{index + 1}</td>
+                <td className="p-3">{item.name}</td>
+                <td className="p-3">{item.trip.location.name}</td>
+                <td className="p-3">{moment(item.trip.startdate).locale("th").format("LL")}</td>
+                <td className="p-3">{item.payMentStatus}</td>
+                <td className="p-3">
+                  <button
+                    className="bg-orange-400 text-white px-4 py-2 rounded"
+                    onClick={() => {
+                      setBookingId(item.id)
+                      openModal()
+                    }}
+                  >
+                    ตรวจสอบการชำระ
+                  </button>
+                </td>
+              </tr>
+            )}
 
 
           </tbody>
@@ -78,17 +96,21 @@ function PaymentCheck() {
             </button>
 
             {/* Slip Information */}
-            <div className="text-center">
-              <img
-                src="https://s359.kapook.com/pagebuilder/ba154685-db18-4ac7-b318-a4a2b15b9d4c.jpg"
-                alt="Slip"
-                className="mb-4"
-              />
-              <div className="flex justify-around mb-4">
-                <button className="bg-red-400 text-white px-4 py-2 rounded">ไม่อนุมัติ</button>
-                <button className="bg-green-400 text-white px-4 py-2 rounded">อนุมัติ</button>
+            {BookingC?.map((item, index) =>
+              <div className="text-center">
+                <img
+                  src={item.Image}
+                  alt="Slip"
+                  className="mb-4"
+                />
+                <div className="flex justify-around mb-4">
+                  <button onClick={hdlCancel} className="bg-red-400 text-white px-4 py-2 rounded">ไม่อนุมัติ</button>
+                  <button onClick={hdlApprove} className="bg-green-400 text-white px-4 py-2 rounded">อนุมัติ</button>
+                </div>
+
               </div>
-            </div>
+            )}
+
           </div>
         </div>
       )}

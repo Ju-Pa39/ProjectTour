@@ -32,7 +32,36 @@ const TourCompanyInfo = () => {
                     </div>
                 </div>
             </div>
-            <table className="w-full bg-gray-200 p-4 rounded-lg">
+            <div className="bg-white shadow-lg rounded-lg p-6">
+        <table className="w-full table-auto">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="p-3 text-left">ลำดับ</th>
+              <th className="p-3 text-left">บริษัททัวร์</th>
+              
+              <th className="p-3 text-left">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {/* {BookingC?.map((item, index) => */}
+
+
+              <tr >
+                <td className="p-3">1</td>
+                <td className="p-3">คลุกฝุ่นทัวร์</td>
+                <td className="p-3 gap-5 flex">
+                            <button className="bg-orange-400 text-white px-4 py-2 rounded">ดู/แก้ไข</button>
+                            <button className="bg-red-500 text-white px-4 py-2 rounded">ลบ</button>
+                        </td>
+              </tr>
+            {/* )} */}
+
+          </tbody>
+        </table>
+      </div>
+
+            {/* <table className="w-full bg-gray-200 p-4 rounded-lg">
                 <thead>
                     <tr className="border-b">
                         <th className="p-2">ลำดับ</th>
@@ -51,7 +80,7 @@ const TourCompanyInfo = () => {
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> */}
 
             {/* Button to Open Modal */}
 

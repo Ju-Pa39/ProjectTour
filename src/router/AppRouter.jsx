@@ -12,15 +12,17 @@ import PaymentCheck from '../pages/Owner/PaymentCheck'
 import CreateTripForm from '../pages/Owner/CreateTripForm'
 import TourCompanyInfo from '../pages/Owner/TourCompanyInfo'
 import Recommend from '../pages/Component/recommend'
+import Login from '../pages/Auth/Login'
 
 const router = createBrowserRouter([
     {
-        path: '/Home',
+        path: '/',
         element: <Layout />,
         children: [
             { index: true, element: <SearchBudget /> },
             { path: 'RegisterForm', element: <RegisterForm /> },
             { path: 'Recommend', element: <Recommend /> },
+            { path: "*", element: <Login />}
 
         ]
         
@@ -32,7 +34,9 @@ const router = createBrowserRouter([
             { index: true, element: <Dashboard /> },
             { path: 'CreateTripForm', element: <CreateTripForm /> },
             { path: 'PaymentCheck', element: <PaymentCheck /> },
-            { path: 'TourCompanyInfo', element: <TourCompanyInfo /> }
+            { path: 'TourCompanyInfo', element: <TourCompanyInfo /> },
+            { path: "*", element: <Dashboard />}
+            
 
             
         ]

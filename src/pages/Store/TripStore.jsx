@@ -14,8 +14,9 @@ const tripStore = create((set) => ({
     token: null,
     UpcomingTrip: null,
     currentTrip: null,
-    booking: null,
+    bookingS: null,
     BookingC: null,
+    
     getAllLocations: async (id) => {
         const res = await axios.get('http://localhost:8000/admin/getLocationById/' + id)
         set({ trips: res.data });
@@ -81,15 +82,25 @@ const tripStore = create((set) => ({
     booking: async (form) => {
         const res = await axios.post('http://localhost:8000/user/booking', form)
         console.log(res.data)
-        set({ booking: res.data });
+        set({ bookingS: res.data });
     },
     getBooking: async () =>{
         const res = await axios.get('http://localhost:8000/user/getBooking')
         console.log(res.data)
         set({ BookingC: res.data });
-    }
+    },
 
 
+    updatebookingStatus: async (id, status) => {
+        const body = {
+            payMentStatus: status
+        }
+        const res = await axios.patch('http://localhost:8000/user//updatebookingstatus/'+id, body, {
+            id
+        })
+        console.log(res.data)
+        set({ BookingC: res.data });
+    },
 }));
 
 

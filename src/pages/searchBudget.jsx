@@ -77,7 +77,6 @@ function SearchBudget() {
                 ? <TripDetail />
                 : <TripDetail_CP />
             } */}
-            <Login />
         </div>
     )
 }

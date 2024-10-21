@@ -22,7 +22,7 @@ const RegisterForm = () => {
     LINE: "",
     images: []
   });
-
+ 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     // console.log(e.target.name, e.target.value)
