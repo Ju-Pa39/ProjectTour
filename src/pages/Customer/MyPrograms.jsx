@@ -54,30 +54,8 @@ function MyPrograms() {
                     />
                 ))}
             </div>
-            <div className="mt-8 space-y-4">
-                {programs.map((program, index) => (
-                    <ProgramCard
-                        key={index}
-                        name={program.name}
-                        date={program.date}
-                        status={program.status}
-                        onCancel={handleCancel}
-                    />
-                ))}
-            </div>
-            <div className="mt-8 space-y-4">
-                {programs.map((program, index) => (
-                    <ProgramCard
-                        key={index}
-                        name={program.name}
-                        date={program.date}
-                        status={program.status}
-                        onCancel={handleCancel}
-                    />
-                ))}
-            </div>
         </div>
     );
 }
 
-export default MyPrograms;
+export default MyPrograms

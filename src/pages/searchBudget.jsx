@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import TripList from './TripList'
-import TourDetail from './TripDetail'
+import TripDetail from './TripDetail'
 import TourPage from './Trippage'
 import Login from './Auth/Login'
 import axios from 'axios'
-import RegisterForm from './Form'
 import Trippage_CP from './Component/Trippage_CP'
-import TourCompanyInfo from './Owner/TourCompanyInfo'
 import Recommend from './Component/recommend'
+import TripDetail_CP from './Component/TripDetali_CP'
 
 
 function SearchBudget() {
@@ -26,7 +25,7 @@ function SearchBudget() {
         setBudget(+e.target.value)
         console.log(search)
     }
- 
+
     const onSubmit = async (e) => {
         e.preventDefault()
         console.log(search)
@@ -63,16 +62,21 @@ function SearchBudget() {
             </form>
             {
                 show
-                ?<TripList data={result} budget={budget} />
-                : <Recommend />
+                    ? <TripList data={result} budget={budget} />
+                    : <Recommend />
             }
             {/* <TripList data={result} budget={budget} /> */}
             {
                 show
-                ? <TourPage data={result} budget={budget} />
-                :  <Trippage_CP />
-            } 
-            <TourDetail />
+                    ? <TourPage data={result} budget={budget} />
+                    : <Trippage_CP />
+            }
+            <TripDetail />
+            {/* {
+                show
+                ? <TripDetail />
+                : <TripDetail_CP />
+            } */}
             <Login />
         </div>
     )

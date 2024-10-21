@@ -58,34 +58,11 @@ const UpLoadFile = (props) => {
             }
         }
     }
-    // console.log(formData)
-
-    // const handleDelete = (public_id) => {
-    //     const images = formData.images
-    //     removeFiles(token, public_id)
-    //         .then((res) => {
-    //             const filterImages = images.filter((item) => {
-    //                 console.log(item)
-    //                 return item.public_id !== public_id
-    //             })
-
-    //             console.log('filterImages', filterImages)
-    //             setFormData({
-    //                 ...formData,
-    //                 images: filterImages
-    //             })
-    //             alert.error(res.data)
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-    // }
-
-
+  
 
     return (
         <div>
-            <div className='flex mx-4 gap-4 my-4'>
+            <div className='flex'>
                 {
                     isLoading && <Loader className='w-16 h-16 animate-spin'/>
                 }

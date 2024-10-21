@@ -1,7 +1,10 @@
 import  tripStore  from "./Store/TripStore";
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-const TourDetail = () => {
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+
+// import axios from "axios";
+const TripDetail = () => {
+  const setcurrentTrip = tripStore((state) => state.setcurrentTrip);
   const trip = tripStore((state) => state.trip);
   const images = trip?.Image && trip.Image.length > 0
   ? trip.Image.map((img) => img.url)
@@ -11,7 +14,11 @@ const TourDetail = () => {
   //   'https://scontent.fbkk28-1.fna.fbcdn.net/v/t39.30808-6/391719363_122096324246086617_6162034278027518019_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=AssqNg9Mt2gQ7kNvgESuXL0&_nc_zt=23&_nc_ht=scontent.fbkk28-1.fna&_nc_gid=AOa30VXRcZLbEA52QU93-nP&oh=00_AYCcg37DXGBmUrT6wl5klDibjIwt8iowUHkHSYF4Lr7ieQ&oe=67187964',
   //   'https://scontent.fbkk28-1.fna.fbcdn.net/v/t39.30808-6/392930969_122096324222086617_2485170338021911442_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=Eaqtg0t8EGkQ7kNvgH9nMW1&_nc_zt=23&_nc_ht=scontent.fbkk28-1.fna&_nc_gid=AYvBiMUW1tz4OkKXRjqC3H8&oh=00_AYBKuhGbZFn7bWT7ebfa2PtLB-KjjXtrivWUS08H4xrkMQ&oe=67188924',
   // ]; // เพิ่ม URL ของรูปภาพที่ต้องการแสดงใน carousel
+  // const [showTrip, setShowTrip] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const navigate = useNavigate();
+
 
   // ฟังก์ชันสำหรับเปลี่ยนรูปภาพ
   const nextImage = () => {
@@ -24,9 +31,17 @@ const TourDetail = () => {
     );
   };
 
+const hdlCilck = (id) => {
+  setcurrentTrip(id)
+  console.log('ttttttttt',id)
+  navigate("/Home/RegisterForm");
+}
+
+
   return (
     <div className="flex flex-col items-center p-8">
-      <h1 className="text-3xl font-bold mb-6">ทริปคลุกฝุ่นทัวร์</h1>
+      <h1 className="text-3xl font-bold mb-6">{trip?.tourCompany?.name}</h1>
+      <h2 className="text-3xl font-bold mb-6">"{trip?.location?.name}"</h2>
 
       {/* Trip Content Section */}
       <div className="flex items-center justify-between w-full max-w-6xl">
@@ -61,15 +76,16 @@ const TourDetail = () => {
 
       {/* Register Button */}
       <div className="mt-6">
-        <Link className="bg-blue-500 text-white py-3 px-6 rounded-lg shadow hover:bg-blue-600 transition duration-300">
+        <button  className="bg-blue-500 text-white py-3 px-6 rounded-lg shadow hover:bg-blue-600 transition duration-300"
+        onClick={()=>hdlCilck(trip?.id)}>
           สมัครเข้าร่วมทริป
-        </Link>
+        </button>
       </div>
     </div>
   );
 };
 
-export default TourDetail;
+export default TripDetail;
 
 
 
