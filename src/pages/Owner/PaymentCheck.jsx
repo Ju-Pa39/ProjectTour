@@ -1,6 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import tripStore from "../Store/TripStore";
+import moment from "moment/min/moment-with-locales";
 
 function PaymentCheck() {
+
+  const BookingC = tripStore((state) => state.BookingC)
+  const getBooking = tripStore((state) => state.getBooking)
+  console.log(BookingC)
+
+  useEffect(() => {
+    getBooking()
+  }, [])
+  
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // เปิด Modal
@@ -11,6 +23,7 @@ function PaymentCheck() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
+  
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
         <div className="text-lg font-bold">รอตรวจสอบชำระเงิน</div>
@@ -24,13 +37,21 @@ function PaymentCheck() {
             <tr className="bg-gray-200">
               <th className="p-3 text-left">ลำดับ</th>
               <th className="p-3 text-left">ชื่อ-สกุล</th>
+              <th className="p-3 text-left">สถานที่</th>
+              <th className="p-3 text-left">วันที่</th>
               <th className="p-3 text-left">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="p-3">1</td>
-              <td className="p-3">นาย พิชัน อำพันทอง</td>
+
+{BookingC?.map((item, index) =>
+
+
+            <tr key={index}>
+              <td className="p-3">{index+1}</td>
+              <td className="p-3">{item.name}</td>
+              <td className="p-3">{item.trip.location.name}</td>
+              <td className="p-3">{moment(item.trip.startdate).locale("th").format("LL")}</td>
               <td className="p-3">
                 <button
                   className="bg-orange-400 text-white px-4 py-2 rounded"
@@ -40,6 +61,9 @@ function PaymentCheck() {
                 </button>
               </td>
             </tr>
+)}
+
+
           </tbody>
         </table>
       </div>

@@ -15,6 +15,7 @@ const tripStore = create((set) => ({
     UpcomingTrip: null,
     currentTrip: null,
     booking: null,
+    BookingC: null,
     getAllLocations: async (id) => {
         const res = await axios.get('http://localhost:8000/admin/getLocationById/' + id)
         set({ trips: res.data });
@@ -81,6 +82,11 @@ const tripStore = create((set) => ({
         const res = await axios.post('http://localhost:8000/user/booking', form)
         console.log(res.data)
         set({ booking: res.data });
+    },
+    getBooking: async () =>{
+        const res = await axios.get('http://localhost:8000/user/getBooking')
+        console.log(res.data)
+        set({ BookingC: res.data });
     }
 
 
