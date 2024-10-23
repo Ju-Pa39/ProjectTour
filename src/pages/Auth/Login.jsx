@@ -15,7 +15,6 @@ const Login = () => {
   })
 
   const postLogin = useUserStore(state => state.postLogin)
-  // const user = useUserStore(state => state.user)
 
   const navigate = useNavigate()
 
@@ -65,9 +64,6 @@ const Login = () => {
       alert(errMsg)
     }
   }
-
-  
-
 
   //Register
   const hdlOnChang = (e) => {

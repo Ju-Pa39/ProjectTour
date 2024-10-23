@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import tripStore from "../Store/TripStore";
 import moment from "moment/min/moment-with-locales";
+import ModalCheckPayment from "../Component/ModalCheckPayment";
 
 function PaymentCheck() {
 
   const [bookingId, setBookingId] = useState(null);
+  // console.log(bookingId)
 
   const updatebookingStatus = tripStore((state) => state.updatebookingStatus)
   const BookingC = tripStore((state) => state.BookingC)
   const getBooking = tripStore((state) => state.getBooking)
-  console.log(BookingC)
+  // console.log(BookingC)
 
   useEffect(() => {
     getBooking()
@@ -27,6 +29,7 @@ function PaymentCheck() {
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // console.log(isModalOpen)
 
   // เปิด Modal
   const openModal = () => setIsModalOpen(true);
@@ -59,8 +62,6 @@ function PaymentCheck() {
           <tbody>
 
             {BookingC?.map((item, index) =>
-
-
               <tr key={index}>
                 <td className="p-3">{index + 1}</td>
                 <td className="p-3">{item.name}</td>
@@ -81,39 +82,13 @@ function PaymentCheck() {
               </tr>
             )}
 
-
           </tbody>
         </table>
       </div>
 
       {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-green-200 p-6 rounded-lg relative">
-            {/* Close button */}
-            <button className="absolute top-2 right-2" onClick={closeModal}>
-              X
-            </button>
-
-            {/* Slip Information */}
-            {BookingC?.map((item, index) =>
-              <div className="text-center">
-                <img
-                  src={item.Image}
-                  alt="Slip"
-                  className="mb-4"
-                />
-                <div className="flex justify-around mb-4">
-                  <button onClick={hdlCancel} className="bg-red-400 text-white px-4 py-2 rounded">ไม่อนุมัติ</button>
-                  <button onClick={hdlApprove} className="bg-green-400 text-white px-4 py-2 rounded">อนุมัติ</button>
-                </div>
-
-              </div>
-            )}
-
-          </div>
-        </div>
-      )}
+      { isModalOpen && <ModalCheckPayment isOpen={isModalOpen}  hdlApprove={hdlApprove} hdlCancel={hdlCancel} setIsModalOpen={setIsModalOpen} bookingId={bookingId}/>
+    }
     </div>
   );
 }

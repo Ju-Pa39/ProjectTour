@@ -9,7 +9,6 @@ const Layout = () => {
         <Header />
       </div>
       <div>
-        <hr />
         <Outlet />
       </div>
     </div>

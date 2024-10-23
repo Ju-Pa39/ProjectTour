@@ -58,15 +58,14 @@ const UpLoadFile = (props) => {
             }
         }
     }
-  
 
     return (
         <div>
             <div className='flex'>
                 {
-                    isLoading && <Loader className='w-16 h-16 animate-spin'/>
+                    isLoading && <Loader className='w-16 h-16 animate-spin' />
                 }
-                
+
                 {/* Image */}
                 {
                     formData.images.map((item, index) =>

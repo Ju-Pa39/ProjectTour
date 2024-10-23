@@ -4,7 +4,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import UpLoadFile from "../Component/Uploadfile";
 import { Calendar } from 'lucide-react';
-
+import { useNavigate } from "react-router-dom";
 
 const CreateTripForm = () => {
   const quillRef = useRef(null)
@@ -14,6 +14,7 @@ const CreateTripForm = () => {
     location: "",
     startDate: "",
     endDate: "",
+    quantity: 0,
     price: "",
     details: "",
     images: [],
@@ -26,6 +27,7 @@ const CreateTripForm = () => {
     getTour()
   }, [])
 
+  const navigate = useNavigate();
 
   const location = tripStore((state) => state.location);
   const getLocation = tripStore((state) => state.getLocation);
@@ -33,7 +35,6 @@ const CreateTripForm = () => {
     getLocation()
   }, [])
   // console.log(getLocation)
-
 
   // Handler to update form state
   const handleChange = (e) => {
@@ -47,14 +48,12 @@ const CreateTripForm = () => {
     setFormData({ ...formData, details: Content });
   };
 
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await postTrip(formData)
       console.log(formData)
+      navigate('/owner/trip')
     } catch (error) {
       console.log(error)
     }
@@ -127,11 +126,23 @@ const CreateTripForm = () => {
           {/* Price Input */}
           <div>
             <input
-              type="text"
+              type="number"
               name="price"
               value={formData.price}
               onChange={handleChange}
               placeholder="ราคา"
+              className="w-full px-4 py-2 border rounded-md bg-gray-200 text-gray-800"
+            />
+          </div>
+
+          {/* quantity Input */}
+          <div>
+            <input
+              type="number"
+              name="quantity"
+              value={formData.quantity}
+              onChange={handleChange}
+              placeholder="จำนวนที่จองได้"
               className="w-full px-4 py-2 border rounded-md bg-gray-200 text-gray-800"
             />
           </div>

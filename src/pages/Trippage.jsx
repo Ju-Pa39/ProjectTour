@@ -25,9 +25,8 @@ console.log("trips",trip)
       <div className="flex flex-col w-full max-w-4xl bg-white rounded-lg shadow-md p-6">
         {/* Left Column */}
         <div className="flex flex-col items-center mb-6">
-          <div className="w-48 h-48 bg-gray-300 flex items-center justify-center">
-            {/* Placeholder Image */}
-            <span className="text-center">Placeholder</span>
+          <div className="mt-4 text-lg font-semibold">
+          จาก “ทริปเที่ยว” อย่าให้เหลือแค่ “เที่ยวทิพย์”
           </div>
           <div className="mt-4 text-lg font-semibold">งบ {budget} บาท</div>
         </div>
@@ -55,8 +54,8 @@ console.log("trips",trip)
               key={destination.id} 
               type="button"
               onClick={() => hdlOnClick(destination.id)}
-              className="flex justify-between items-center bg-gray-100 p-4 rounded-lg">
-                <div className="flex items-center">
+              className="flex justify-between items-center bg-gray-100 p-4 rounded-lg ">
+                <div className="flex items-center gap-2">
                   <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mr-4">
                     {/* Tour Image Placeholder */}
                     รูปทัวร์

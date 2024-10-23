@@ -8,7 +8,7 @@ const Trippage_CP = () => {
     useEffect(() => {
         getTripByDate()
     }, [])
-    // console.log('Jutestttt',tripDate)
+    console.log('Jutestttt',tripDate)
 
     const getAllTrip = tripStore((state) => state.getAllTrip);
     const hdlOnClick = (id) => {
@@ -26,11 +26,11 @@ const Trippage_CP = () => {
             <div className="flex flex-col w-full max-w-4xl bg-white rounded-lg shadow-md p-6">
                 {/* Left Column */}
                 <div className="flex flex-col items-center mb-6">
-                    <div className="w-48 h-48 bg-gray-300 flex items-center justify-center">
+                    {/* <div className="w-48 h-48 bg-gray-300 flex items-center justify-center"> */}
                         {/* Placeholder Image */}
-                        <span className="text-center">Placeholder</span>
-                    </div>
-                    <div className="mt-4 text-lg font-semibold">ทริปไฟไหม้</div>
+                        {/* <span className="text-center">Placeholder</span> */}
+                    {/* </div> */}
+                    <div className="mt-4 text-lg font-semibold">จาก “ทริปเที่ยว” อย่าให้เหลือแค่ “เที่ยวทิพย์”</div>
                 </div>
 
                 {/* Right Column (Tour List) */}
@@ -55,12 +55,12 @@ const Trippage_CP = () => {
                                 key={destination.id}
                                 type="button"
                                 onClick={() => hdlOnClick(destination.id)}
-                                className="flex justify-between items-center bg-gray-100 p-4 rounded-lg">
+                                className="flex justify-between items-center bg-green-200 p-4 rounded-lg">
                                 <div className="flex items-center">
-                                    <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mr-4">
-
-                                        รูปทัวร์
-                                    </div>
+                                    {/* <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mr-4">
+                                        {destination.location.name}
+                                    </div> */}
+                                    <button className="btn btn-outline"> {destination.location.name} </button>
                                     <div>{destination.tourCompany.name} {new Date(destination.startdate).toLocaleDateString()}</div>
                                 </div>
                                 <div className="text-lg font-semibold">{destination.price} บาท/คน</div>

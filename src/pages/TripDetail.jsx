@@ -12,7 +12,6 @@ const TripDetail = () => {
 
   // const [showTrip, setShowTrip] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const navigate = useNavigate();
 
 
@@ -27,17 +26,17 @@ const TripDetail = () => {
     );
   };
 
-  const hdlCilck = (id) => {
+  const hdlClick = (id) => {
     setcurrentTrip(id)
-    console.log('ttttttttt', id)
+    console.log('TripDetail hdlClick Id =', id)
     navigate("/Home/RegisterForm");
   }
 
 
   return (
     <div className="flex flex-col items-center p-8">
-      <h1 className="text-3xl font-bold mb-6">{trip?.tourCompany?.name}</h1>
-      <h2 className="text-3xl font-bold mb-6">"{trip?.location?.name}"</h2>
+      <h1 className="text-3xl font-bold mb-6 text-white">{trip?.tourCompany?.name}</h1>
+      <h2 className="text-3xl font-bold mb-6 text-white">"{trip?.location?.name}"</h2>
 
       {/* Trip Content Section */}
       <div className="flex items-center justify-between w-full max-w-6xl">
@@ -73,7 +72,7 @@ const TripDetail = () => {
       {/* Register Button */}
       <div className="mt-6">
         <button className="bg-blue-500 text-white py-3 px-6 rounded-lg shadow hover:bg-blue-600 transition duration-300"
-          onClick={() => hdlCilck(trip?.id)}>
+          onClick={() => hdlClick(trip?.id)}>
           สมัครเข้าร่วมทริป
         </button>
       </div>

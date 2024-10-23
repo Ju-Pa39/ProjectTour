@@ -1,6 +1,7 @@
 import React from 'react';
-
+import { Navigate } from 'react-router-dom';
 const Dashboard = () => {
+  // const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       {/* Header */}
@@ -19,7 +20,7 @@ const Dashboard = () => {
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">คลุกฝุ่นทัวร์</h2>
-          <button className="bg-gray-300 text-black px-4 py-2 rounded-md">สร้างทัวร์เที่ยว</button>
+          <button className="bg-gray-300 text-black px-4 py-2 rounded-md">สร้างทริปเที่ยว</button>
         </div>
 
         {/* Tour Table */}
@@ -35,19 +36,19 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody>
-            <TourRow 
-              tour="1. เปรโต๊ะลอซู" 
-              location="เปรโต๊ะลอซู" 
-              price="3000" 
-              totalGuests="10/10" 
-              paidGuests="9/10" 
+            <TourRow
+              tour="1. เปรโต๊ะลอซู"
+              location="เปรโต๊ะลอซู"
+              price="3000"
+              totalGuests="10/10"
+              paidGuests="9/10"
             />
-            <TourRow 
-              tour="2. เปรโต๊ะลอซู" 
-              location="เปรโต๊ะลอซู" 
-              price="2800" 
-              totalGuests="2/10" 
-              paidGuests="2/10" 
+            <TourRow
+              tour="2. เปรโต๊ะลอซู"
+              location="เปรโต๊ะลอซู"
+              price="2800"
+              totalGuests="2/10"
+              paidGuests="2/10"
             />
           </tbody>
         </table>
@@ -72,7 +73,7 @@ const TourRow = ({ tour, location, price, totalGuests, paidGuests }) => (
     <td className="p-2 border-b">{price}</td>
     <td className="p-2 border-b">{totalGuests}</td>
     <td className="p-2 border-b">{paidGuests}</td>
-   
+
   </tr>
 );
 

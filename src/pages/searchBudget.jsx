@@ -2,12 +2,10 @@ import React, { useState } from 'react'
 import TripList from './TripList'
 import TripDetail from './TripDetail'
 import TourPage from './Trippage'
-import Login from './Auth/Login'
 import axios from 'axios'
 import Trippage_CP from './Component/Trippage_CP'
 import Recommend from './Component/recommend'
 import TripDetail_CP from './Component/TripDetali_CP'
-
 
 function SearchBudget() {
     const [search, setSearch] = useState({
@@ -39,7 +37,6 @@ function SearchBudget() {
         }
     }
 
-
     return (
         <div className='gap-2' >
             <form onSubmit={onSubmit}>
@@ -51,7 +48,7 @@ function SearchBudget() {
                             name='price'
                             onChange={onChangeSearch}
                             type="Int"
-                            placeholder=""
+                            placeholder="กรอกงบ"
                             className="px-4 py-2 text-xl rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
                         <button className="mt-4 px-6 py-2 bg-gray-200 text-black text-lg font-medium rounded-md hover:bg-gray-300">
@@ -65,7 +62,6 @@ function SearchBudget() {
                     ? <TripList data={result} budget={budget} />
                     : <Recommend />
             }
-            {/* <TripList data={result} budget={budget} /> */}
             {
                 show
                     ? <TourPage data={result} budget={budget} />
