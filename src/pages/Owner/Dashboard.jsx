@@ -2,6 +2,8 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 const Dashboard = () => {
   // const navigate = useNavigate();
+
+  {/* ไม่ทัน */}
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       {/* Header */}

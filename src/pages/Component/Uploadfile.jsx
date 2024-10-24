@@ -45,6 +45,7 @@ const UpLoadFile = (props) => {
                                 })
                                 setIsLoading(false)
                                 alert.success('Upload image Sucess!!!')
+                                console.log(res.data)
                             })
                             .catch((err) => {
                                 console.log(err)

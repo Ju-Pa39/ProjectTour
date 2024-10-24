@@ -42,7 +42,7 @@ function SearchBudget() {
             <form onSubmit={onSubmit}>
                 <div className="relative h-screen w-full bg-cover bg-center" style={{ backgroundImage: "url('/path-to-your-image.png')" }}>
                     <div className="absolute inset-0"></div>
-                    <div className="relative z-10 flex flex-col justify-center items-center h-full">
+                    <div className="relative flex flex-col justify-center items-center h-full">
                         <h1 className="text-4xl sm:text-4xl text-white font-bold mb-6">กรอก"งบ"เที่ยว</h1>
                         <input
                             name='price'

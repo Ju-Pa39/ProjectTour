@@ -9,3 +9,12 @@ export const deleteTripS = async (id,token) => {
     console.log(res.data)
     return res
 }
+
+export const currentUser = (token) =>{
+    return axios.post(`http://localhost:8000/auth/current-user`,{},{
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+  }
+  

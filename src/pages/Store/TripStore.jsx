@@ -9,7 +9,7 @@ const tripStore = create((set) => ({
     tripDate: null,
     tour: [],
     location: [],
-    postTrip: null,
+    postTripS: null,
     user: null,
     UpcomingTrip: null,
     currentTrip: null,
@@ -34,7 +34,7 @@ const tripStore = create((set) => ({
         // console.log(res.data)
         set({ tripDate: res.data });
     },
-    getTour: async () => {
+    getTour: async (token) => {
         const res = await axios.get('http://localhost:8000/admin/getTour', {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -69,14 +69,14 @@ const tripStore = create((set) => ({
             }
         })
     },
-    postTrip: async (form) => {
+    postTrip: async (form, token) => {
         const res = await axios.post('http://localhost:8000/admin/createTrip', form, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
         console.log(res.data)
-        set({ postTrip: res.data });
+        set({ postTripS: res.data });
     },
     upcomingTrip: async () => {
         const res = await axios.get('http://localhost:8000/admin/getUpcomingTrip')
@@ -120,7 +120,7 @@ const tripStore = create((set) => ({
         console.log(res.data)
         return res.data.trip
     },
-    updateTripById: async (id, form) => {
+    updateTripById: async (token,id, form) => {
         const res = await axios.patch('http://localhost:8000/admin/getTrip/' + id, form, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -129,7 +129,7 @@ const tripStore = create((set) => ({
         console.log(res.data)
         set({ updateTrip: res.data });
     },
-    deleteTripById: async (id) => {
+    deleteTripById: async (token,id) => {
         const res = await axios.delete('http://localhost:8000/admin/deleteTrip/' + id, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -137,7 +137,7 @@ const tripStore = create((set) => ({
         })
         console.log(res.data)
     },
-    createTour: async (form) => {
+    createTour: async (token,form) => {
         const res = await axios.post('http://localhost:8000/admin/createTour', form, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -155,7 +155,7 @@ const tripStore = create((set) => ({
         console.log(res.data)
         return res.data.tour
     },
-    updateTourById: async (id, form) => {
+    updateTourById: async (token,id, form) => {
         const res = await axios.patch('http://localhost:8000/admin/updateTour/' + id, form, {
             headers: {
                 Authorization: `Bearer ${token}`

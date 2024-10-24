@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import tripStore from '../Store/TripStore';
 import useUserStore from '../Store/userStore';
+import { toast } from 'react-toastify';
 
 const TourCompanyInfo = () => {
     const tour = tripStore((state) => state.tour);
@@ -8,7 +9,7 @@ const TourCompanyInfo = () => {
     const createTour = tripStore((state) => state.createTour);
     const updateTour = tripStore((state) => state.updateTourById); 
     const deleteTourById = tripStore((state) => state.deleteTourById); 
-
+    const token = useUserStore((state) => state.token);
     const user = useUserStore((state) => state.user);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +22,7 @@ const TourCompanyInfo = () => {
     });
 
     useEffect(() => {
-        getTour();
+        getTour(token);
     }, []);
 
     const handleOpenModal = (tourData) => {
@@ -53,14 +54,17 @@ const TourCompanyInfo = () => {
                     userId: user.id,
                 };
                 if (form.id) {
-                    await updateTour(form.id, formData); 
+                    await updateTour(token,form.id, formData);
+                    toast.success('อัพเดทข้อมูลสำเร็จ');
                 } else {
-                    await createTour(formData); 
+                    await createTour(token,formData); 
+                    toast.success('สร้างข้อมูลสำเร็จ');
                 }
                 handleCloseModal();
-                getTour(); 
+                getTour(token); 
             } else {
                 console.error('User ID is missing');
+                toast.error('ไม่สามารถสร้างข้อมูลได้');
             }
         } catch (error) {
             console.error('Error:', error);

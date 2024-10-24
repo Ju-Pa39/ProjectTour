@@ -7,18 +7,28 @@ const Recommend = () => {
   // ข้อมูลของรูปภาพใน Carousel
   const images = [
     {
-      src: 'https://scontent.fbkk28-1.fna.fbcdn.net/v/t39.30808-6/458775652_1066391981522567_7716773856454244057_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=3JuH3YpXIP0Q7kNvgEVxmVd&_nc_zt=23&_nc_ht=scontent.fbkk28-1.fna&_nc_gid=AHm8XfkTb-EakmmYtgWxMC1&oh=00_AYANMPMQ7Sf6dp8ib8swmVHSGO9f-nWcAT-SJjfdk5IAMA&oe=6719AACA',
+      src: 'https://scontent.fbkk7-2.fna.fbcdn.net/v/t39.30808-6/458610634_1066367728191659_3618401437566599220_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Td14O0Ip7H0Q7kNvgH0RFve&_nc_zt=23&_nc_ht=scontent.fbkk7-2.fna&_nc_gid=Aih1ds2rbO0at_ZE4_NlrIQ&oh=00_AYC-LTNe3fXHK9nC3jlTWcwZtD5Wb-PWQUiTsntfAHkQkQ&oe=671EF649',
       
     },
     {
-      src: 'https://scontent.fbkk28-1.fna.fbcdn.net/v/t39.30808-6/458610634_1066367728191659_3618401437566599220_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=z8m3vajJlHwQ7kNvgGx_pMT&_nc_zt=23&_nc_ht=scontent.fbkk28-1.fna&_nc_gid=AUkDkAfp_daZCHZXyvtsbm7&oh=00_AYBtWowA6wzj9C-lQ1iSBNc4su_EKeBlwcc6zaINY3OVMg&oe=6719B049',
-    //   title: 'เลอกวาเดาะ',
-    //   description: 'ผ่อนคลายสุดสัปดาห์',
+      src: 'https://scontent.fbkk7-2.fna.fbcdn.net/v/t39.30808-6/458776459_1066312494863849_6541272187055259468_n.jpg?stp=dst-jpg_p960x960&_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=wkVn63JaLmEQ7kNvgGZSkzE&_nc_zt=23&_nc_ht=scontent.fbkk7-2.fna&_nc_gid=AXzJOqE9oKeWlRqf9vQJ9Dg&oh=00_AYBZ1q3hXkRHojUvkn6Pkfc4o8832_38qPUaA2-Ry54dMA&oe=671F046D',
+   
     }, 
     {
-      src: 'https://scontent.fbkk28-1.fna.fbcdn.net/v/t39.30808-6/458776459_1066312494863849_6541272187055259468_n.jpg?stp=dst-jpg_p960x960&_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=3sADdPJlWAAQ7kNvgE1i26-&_nc_zt=23&_nc_ht=scontent.fbkk28-1.fna&_nc_gid=AJdCfrgR0ppz8ZeSDqcbHWM&oh=00_AYA3zLTOhainC4vHAWlSzWYhUr_bubUVSaw91pD-GV3dGQ&oe=671915AD',
-    //   title: '5 ภูเขาน่าเที่ยว',
-    //   description: 'สูดอากาศบริสุทธิ์',
+      src: 'https://scontent.fbkk7-2.fna.fbcdn.net/v/t39.30808-6/456168183_1052898909538541_4228610203031770298_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=6I4OozjJsq0Q7kNvgE9Lxku&_nc_zt=23&_nc_ht=scontent.fbkk7-2.fna&_nc_gid=AD2UvzdGq0qYl-0q7pbX9R-&oh=00_AYCK52Y-d_tkDyCESmpJ4YsLC7bGk76M2SA4_iQuOPo37A&oe=671F0252',
+    
+    },
+    {
+      src: 'https://scontent.fbkk7-3.fna.fbcdn.net/v/t39.30808-6/448223653_1014245410070558_8056054403206880785_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=MiN8d51Zga8Q7kNvgH_rtLm&_nc_zt=23&_nc_ht=scontent.fbkk7-3.fna&_nc_gid=AMS6Ny0rpgkrMQhRijUCFaR&oh=00_AYBVthW-OSuBRbbPTuuD23MQcTTpXRrpX_LSeX8XPIspyw&oe=671F2082',
+      
+    },
+    {
+      src: 'https://www.uptomego.com/wp-content/uploads/2023/02/4-7.png',
+      
+    },
+    {
+      src: 'https://scontent.fbkk7-2.fna.fbcdn.net/v/t39.30808-6/426044439_939157990912634_191051909065610548_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=BuWfZ8aoHq8Q7kNvgFyHeCm&_nc_zt=23&_nc_ht=scontent.fbkk7-2.fna&_nc_gid=A6LgdYRozBo-cnhikB7mqg7&oh=00_AYBwX5FSKQ0k1_4CMX0zP3fPVvFrdOjo7CYtkyQ6AztmWw&oe=671F0C27',
+      
     },
   ];
 

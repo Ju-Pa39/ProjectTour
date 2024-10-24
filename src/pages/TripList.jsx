@@ -4,13 +4,11 @@ import tripStore from "./Store/TripStore";
 function TripList(props) {
   const { data, budget } = props
 
-
   const filteredDupLocation = data.filter((item, index) => {
     return data.findIndex(t => t.location.name === item.location.name) === index;
   });
 
   const getAllLocations = tripStore((state) => state.getAllLocations);
-
 
   const hdlOnClick = (id) => {
     try {
@@ -19,8 +17,6 @@ function TripList(props) {
       console.log(err)
     }
   }
-
-
   return (
     <div className="min-h-screen flex flex-col " >
       {/* Content */}

@@ -4,18 +4,24 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import UpLoadFile from "../Component/Uploadfile";
 import { useNavigate, useParams } from "react-router-dom";
+import useUserStore from "../Store/userStore";
+import { toast } from "react-toastify";
+
 
 const UpdateTripForm = () => {
   const getTripById = tripStore((state) => state.getTripById);
   const { id } = useParams()
   const quillRef = useRef(null);
-const navigate = useNavigate();
+  const navigate = useNavigate();
+  const token = useUserStore((state) => state.token);
+  console.log(token)
 
   // State for form fields
   const [formData, setFormData] = useState(null);
 
   const getTripInfo = async () => {
     const trip = await getTripById(id);
+    console.log("test image", trip.image);
     setFormData({
       tour: trip.tourCompany.id,
       location: trip.location.id,
@@ -42,7 +48,7 @@ const navigate = useNavigate();
   const tour = tripStore((state) => state.tour);
   const getTour = tripStore((state) => state.getTour);
   useEffect(() => {
-    getTour();
+    getTour(token);
   }, []);
 
   const location = tripStore((state) => state.location);
@@ -67,19 +73,20 @@ const navigate = useNavigate();
     e.preventDefault();
     try {
       const updateData = {
-        tourCompany_Id: +formData.tour,  
-        location_Id: +formData.location,  
-        startdate: formData.startDate,   
-        enddate: formData.endDate,       
+        tourCompany_Id: +formData.tour,
+        location_Id: +formData.location,
+        startdate: formData.startDate,
+        enddate: formData.endDate,
         quantity: +formData.quantity,
         price: +formData.price,
-        detail: formData.details,       
+        detail: formData.details,
         image: formData.images
       };
       console.log(updateData);
-      await updateTrip(id, updateData); 
+      await updateTrip(token, id, updateData);
       console.log("Trip updated successfully:", formData);
       navigate('/Owner/ListTrip')
+      toast.success('อัพเดททริปสำเร็จ')
     } catch (error) {
       console.log("Error updating trip:", error);
     }
@@ -89,7 +96,7 @@ const navigate = useNavigate();
   const handleDeleteImage = async (imageId) => {
     try {
       // Perform image delete request here
-      await tripStore.deleteImage(imageId); 
+      await tripStore.deleteImage(imageId);
       setExistingImages(prev => prev.filter((image) => image.id !== imageId));
     } catch (error) {
       console.log("Error deleting image:", error);

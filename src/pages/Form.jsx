@@ -3,6 +3,8 @@ import useUserStore from './Store/userStore';
 import tripStore from './Store/TripStore';
 import UpLoadFile from './Component/Uploadfile';
 import { useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const RegisterForm = () => {
   const booking = tripStore((state) => state.booking);
@@ -10,19 +12,20 @@ const RegisterForm = () => {
   const currentTrip = tripStore((state) => state.currentTrip);
   // console.log(currentTrip)
   // console.log(user)
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     userId: user.id,
     tripId: currentTrip,
-    name:"",
-    nickName:"",
-    gender:"",
-    age:"",
-    phoneNumber:"",
+    name: "",
+    nickName: "",
+    gender: "",
+    age: "",
+    phoneNumber: "",
     LINE: "",
     images: []
   });
- 
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     // console.log(e.target.name, e.target.value)
@@ -33,7 +36,14 @@ const RegisterForm = () => {
     e.preventDefault();
     console.log(formData)
     try {
+      if (!currentTrip) {
+        navigate('/');
+        toast.error('กรุณาเลือกทริปก่อนทำการลงทะเบียน')
+        return
+      }
       const res = await booking(formData)
+      navigate('/');
+      toast.success('ลงทะเบียนสำเร็จ')
       console.log(formData)
     } catch (error) {
       console.log(error)
@@ -42,65 +52,67 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg" style={{ padding: '20px', maxWidth: '400px', margin: '0 auto' }}>
-      <h2>กรอกข้อมูลลงทะเบียน</h2>
-      <p>Tripid {currentTrip}</p>
-      <form onSubmit={handleSubmit} >
-        <input
-        name='name'
-        onChange={handleChange} 
-        type="text" 
-        placeholder="ชื่อ-นามสกุล" 
-        style={inputStyle} />
+    <>
+      <div className='h-20'></div>
+      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg " style={{ padding: '20px', maxWidth: '400px', margin: '0 auto' }}>
+        <h2>กรอกข้อมูลลงทะเบียน</h2>
+        <p>Tripid {currentTrip}</p>
+        <form onSubmit={handleSubmit} >
+          <input
+            name='name'
+            onChange={handleChange}
+            type="text"
+            placeholder="ชื่อ-นามสกุล"
+            style={inputStyle} />
 
-        <input
-        name='nickName'
-        onChange={handleChange} 
-        type="text" 
-        placeholder="ชื่อเล่น" 
-        style={inputStyle} />
-        
-        <div style={rowStyle}>
-          <select 
-          namename='gender'
-          onChange={handleChange} 
-          style={selectStyle}>
-            <option>เพศ</option>
-            <option value="male">MALE</option>
-            <option value="female">FEMALE</option>
-            <option value="female">OTHER</option>
-          </select>
+          <input
+            name='nickName'
+            onChange={handleChange}
+            type="text"
+            placeholder="ชื่อเล่น"
+            style={inputStyle} />
 
-          <input 
-          name='age'
-          onChange={handleChange} 
-          type="number" 
-          placeholder="อายุ" 
-          style={halfInputStyle} />
-        </div>
-        
-        <input 
-        name='phoneNumber'
-        onChange={handleChange} 
-        type="text" 
-        placeholder="เบอร์ติดต่อ" 
-        style={inputStyle} />
+          <div style={rowStyle}>
+            <select
+              namename='gender'
+              onChange={handleChange}
+              style={selectStyle}>
+              <option>เพศ</option>
+              <option value="male">MALE</option>
+              <option value="female">FEMALE</option>
+              <option value="female">OTHER</option>
+            </select>
 
-        <input 
-        name='LINE'
-        onChange={handleChange} 
-        type="text" 
-        placeholder="ID LINE" 
-        style={inputStyle} />
-         
-        <p>ธ.กรุงไทย เลขบัญชี xx-xxxxx-xx</p>
-        <p>อัปโหลดสลิป</p>
-        <UpLoadFile formData={formData} setFormData={setFormData} style={inputStyle} />
+            <input
+              name='age'
+              onChange={handleChange}
+              type="number"
+              placeholder="อายุ"
+              style={halfInputStyle} />
+          </div>
 
-        
-        <button  type="submit" style={buttonStyle}>บันทึก</button>
-      </form>
-    </div>
+          <input
+            name='phoneNumber'
+            onChange={handleChange}
+            type="text"
+            placeholder="เบอร์ติดต่อ"
+            style={inputStyle} />
+
+          <input
+            name='LINE'
+            onChange={handleChange}
+            type="text"
+            placeholder="ID LINE"
+            style={inputStyle} />
+
+          <p>ธ.กรุงไทย เลขบัญชี xx-xxxxx-xx</p>
+          <p>อัปโหลดสลิป</p>
+          <UpLoadFile formData={formData} setFormData={setFormData} style={inputStyle} />
+
+          <button type="submit" style={buttonStyle}>บันทึก</button>
+        </form>
+      </div>
+    </>
   );
 };
 

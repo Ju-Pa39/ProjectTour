@@ -12,7 +12,8 @@ const userStore = ((set) => ({
             token: res.data.token
          })
         return res
-    }
+    },
+    resetUser: () => set({ user: null, token: null })
 }));
 
 const usePersist ={

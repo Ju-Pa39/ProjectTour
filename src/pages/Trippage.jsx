@@ -35,11 +35,14 @@ console.log("trips",trip)
         <div className="flex-grow w-full">
           {/* Search and Filter */}
           <div className="flex justify-between mb-4">
+            {/* ไม่ทัน */}
             <input
               type="text"
               placeholder="ค้นหาทัวร์"
               className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+
+            {/* ไม่ทัน */}
             <select className="ml-4 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
               <option>ราคาถูกไปแพง</option>
               <option>ราคาแพงไปถูก</option>

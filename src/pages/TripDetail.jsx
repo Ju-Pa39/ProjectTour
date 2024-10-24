@@ -1,6 +1,7 @@
 import tripStore from "./Store/TripStore";
 import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import useUserStore from "./Store/userStore";
 
 // import axios from "axios";
 const TripDetail = () => {
@@ -10,10 +11,11 @@ const TripDetail = () => {
     ? trip.Image.map((img) => img.url)
     : [];
 
-  // const [showTrip, setShowTrip] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const navigate = useNavigate();
+  const user = useUserStore((state) => state.user);
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const navigate = useNavigate();
 
   // ฟังก์ชันสำหรับเปลี่ยนรูปภาพ
   const nextImage = () => {
@@ -27,25 +29,30 @@ const TripDetail = () => {
   };
 
   const hdlClick = (id) => {
-    setcurrentTrip(id)
-    console.log('TripDetail hdlClick Id =', id)
-    navigate("/Home/RegisterForm");
-  }
-
+    const token = localStorage.getItem('token');  
+    if(user) {
+      setcurrentTrip(user.id);
+      console.log('TripDetail hdlClick Id =', id);
+      navigate("/RegisterForm");
+    } else {
+      console.log("User is not logged in");
+      navigate("/login");  
+    }
+  };
 
   return (
     <div className="flex flex-col items-center p-8">
       <h1 className="text-3xl font-bold mb-6 text-white">{trip?.tourCompany?.name}</h1>
       <h2 className="text-3xl font-bold mb-6 text-white">"{trip?.location?.name}"</h2>
 
-      {/* Trip Content Section */}
+      {/* Trip Content  */}
       <div className="flex items-center justify-between w-full max-w-6xl">
         {/* Trip Details */}
         <div className="border border-gray-400 p-4 w-1/2 bg-gray-100 rounded-lg">
           <p dangerouslySetInnerHTML={{ __html: trip?.detail }}></p>
         </div>
 
-        {/* Trip Image Carousel */}
+        {/* Trip Image  */}
         <div className="w-1/2 px-4 relative">
           <img
             src={images[currentIndex]}

@@ -65,9 +65,9 @@ function PaymentCheck() {
               <tr key={index}>
                 <td className="p-3">{index + 1}</td>
                 <td className="p-3">{item.name}</td>
-                <td className="p-3">{item.trip.location.name}</td>
-                <td className="p-3">{moment(item.trip.startdate).locale("th").format("LL")}</td>
-                <td className="p-3">{item.payMentStatus}</td>
+                <td className="p-3">{item?.trip?.location?.name}</td>
+                <td className="p-3">{moment(item?.trip?.startdate).locale("th").format("LL")}</td>
+                <td className="p-3">{item?.payMentStatus}</td>
                 <td className="p-3">
                   <button
                     className="bg-orange-400 text-white px-4 py-2 rounded"
@@ -94,5 +94,3 @@ function PaymentCheck() {
 }
 
 export default PaymentCheck;
-
-

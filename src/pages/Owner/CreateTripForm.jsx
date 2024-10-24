@@ -3,8 +3,9 @@ import tripStore from "../Store/TripStore";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import UpLoadFile from "../Component/Uploadfile";
-import { Calendar } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../Store/userStore";
+import { toast } from "react-toastify";
 
 const CreateTripForm = () => {
   const quillRef = useRef(null)
@@ -20,11 +21,12 @@ const CreateTripForm = () => {
     images: [],
   });
   // console.log(formData)
+  const token = useUserStore((state) => state.token);
   const postTrip = tripStore((state) => state.postTrip);
   const tour = tripStore((state) => state.tour);
   const getTour = tripStore((state) => state.getTour);
   useEffect(() => {
-    getTour()
+    getTour(token)
   }, [])
 
   const navigate = useNavigate();
@@ -51,9 +53,10 @@ const CreateTripForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await postTrip(formData)
-      console.log(formData)
+      const res = await postTrip(formData, token)
+      console.log("test", formData)
       navigate('/owner/trip')
+      toast.success('สร้างทริปสำเร็จ')
     } catch (error) {
       console.log(error)
     }
@@ -61,8 +64,6 @@ const CreateTripForm = () => {
   };
 
   return (
-
-
     <div className="flex items-center justify-center h-screen">
       <div className="w-full max-w-3xl p-6 bg-white rounded-lg shadow-lg">
         {/* Logo */}
@@ -152,7 +153,7 @@ const CreateTripForm = () => {
             <ReactQuill ref={quillRef} name="details" theme="snow" value={formData.details} onChange={handleChangeQuill} />
           </div>
 
-          {/* Image Upload************************************** */}
+          {/* Image Upload */}
           <div className="col-span-2">
             <label className="block mb-2 text-sm text-gray-600">
               อัปโหลดรูป
@@ -172,7 +173,6 @@ const CreateTripForm = () => {
           </div>
         </form>
       </div>
-      {/* <div dangerouslySetInnerHTML={{ __html: formData.details }} /> */}
     </div>
   );
 };

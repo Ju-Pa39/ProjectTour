@@ -4,6 +4,7 @@ import {  } from "module";
 import { useNavigate } from "react-router-dom";
 import tripStore from "../Store/TripStore";
 import useUserStore from "../Store/userStore";
+import { toast } from "react-toastify";
 
 
 const Login = () => {
@@ -53,6 +54,7 @@ const Login = () => {
       const res = await postLogin(formLogin)
       console.log(formLogin)
       console.log(res.data.payload.role)
+      toast.success('เข้าสู่ระบบสำเร็จ')
       if (res.data.payload.role === 'OWNER') {
         navigate('/owner')
       } else if (res.data.payload.role === 'CUSTOMER') {
@@ -87,6 +89,8 @@ const Login = () => {
       console.log(err)
     }
   }
+
+  console.log("this is login page")
   return (
     <div className="flex items-center justify-center h-screen">
       {/* Login Box */}
@@ -219,7 +223,7 @@ const Login = () => {
                 >
                   ยกเลิก
                 </button>
-                <button onClick={closeModal} className="bg-blue-500 text-white py-2 px-6 rounded-lg">
+                <button  className="bg-blue-500 text-white py-2 px-6 rounded-lg">
                   สร้างบัญชี
                 </button>
               </div>
